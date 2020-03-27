@@ -4,7 +4,7 @@
 function initialPosition() {
     const gameBoard = document.querySelector('.game-board');
     for (let item = 1; item < 37; item++) {
-        let square = `<div class="square square-${item} js-target-error"><span class="squaer__text">${item}</span></div>`;
+        let square = `<div class="square square-${item} js-target-error"><span class="squaer__text" id="${item}"></span></div>`;
         gameBoard.insertAdjacentHTML('beforeend', square);
     }
 }

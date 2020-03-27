@@ -4,6 +4,7 @@
 let btnBlock = true;
 let counterError = 0;
 let limit = 10;
+let stepUser = 1;
 let numberSquare = 0;
 let startTime;
 let endTime;
@@ -30,10 +31,10 @@ function randomNumber() {
  * Попадание в активный квадрат
  */
 function hittingTarget(dataTarget) {
-    const number = dataTarget.innerHTML;
+    const number = dataTarget.getAttribute('id');
     hideSquare(number);
     limit--;
-    document.querySelector('.js-counter-square').textContent = `${limit}`;
+    stepUser++;
     round();
 }
 
@@ -59,6 +60,7 @@ function showSquare(number) {
     let parent = document.querySelector(`.square-${number}`);
     parent.classList.remove('js-target-error');
     parent.firstElementChild.classList.add('js-target-for-user');
+    parent.firstElementChild.textContent = `${stepUser}`;
 }
 
 /**
@@ -69,6 +71,7 @@ function hideSquare(number) {
     let parent = document.querySelector(`.square-${number}`);
     parent.classList.add('js-target-error');
     parent.firstElementChild.classList.remove('js-target-for-user');
+    parent.firstElementChild.textContent = ``;
 }
 
 /**
@@ -93,14 +96,13 @@ function round() {
  */
 function restartGame() {
     limit = 10;
+    stepUser = 1;
     counterError = 0;
     numberSquare = 0;
     startTime = new Date().getTime();
     endTime = new Date().getTime();
     document.querySelector('.game-board').style.display = 'grid';
     document.querySelector('.start-btn').style.display = 'block';
-    document.querySelector('.js-counter-square').textContent = `${limit}`;
-    document.querySelector('.game-counter').style.display = 'block';
     const resultText = document.querySelector('.result-game__text');
     resultText ? resultText.style.display = 'none' : false;
     const targetForUser = document.querySelector('.js-target-for-user');
@@ -127,7 +129,6 @@ function endGame() {
     endTime = new Date().getTime();
     const gameTitle = document.querySelector('.game-title');
     document.querySelector('.game-board').style.display = 'none';
-    document.querySelector('.game-counter').style.display = 'none';
     document.querySelector('.start-btn').style.display = 'none';
     let resultTime = timing();
     let displayResult = `<span class="result-game__text">Вы нашли 10 зеленных квадратов за ${resultTime} секунд. Промахов: ${counterError}</span>`;
