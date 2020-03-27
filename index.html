@@ -11,23 +11,13 @@
 <body>
     <div class="container">
         <main class="main">
-            <span class="timer-start">Поехали!</span>
             <span class="game-title">10 квадратов</span>
-            <div class="modal-window">
-                <form action="#" class="form-level">
-                    <span class="form-level-title">Выбeрите уровень сложности:</span>
-                    <input type="radio" name="level" id="level-1" class="form-input">
-                    <label for="level-1" class="form-label">Слабачек</label>
-                    <input type="radio" name="level" id="level-2" class="form-input">
-                    <label for="level-2" class="form-label">Вроде "да", а вроде "нет"</label>
-                    <input type="radio" name="level" id="level-3" class="form-input">
-                    <label for="level-3" class="form-label">САМЕЦ</label>
-                </form>
-                <img class="icon-close js-icon-close" width="30px" height="30px" src="img/icon-close.png" alt="icon close">
-                <button type="button" class="start-game js-start-game">Начать</button>
-            </div>
+            <p class="game-counter">Осталось квадратов: <span class="js-counter-square">10</span></p>
             <div class="game-board"></div>
-            <button class="game-btn js-choise-level">Играть заново</button>
+            <div class="btn-wrp">
+                <button class="game-btn js-restart-game">Играть заново</button>
+                <button class="start-btn js-start-game">Старт</button>
+            </div>
         </main>
     </div>
 <script src="js/utils.js"></script>
