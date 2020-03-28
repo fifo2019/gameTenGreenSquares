@@ -31,8 +31,7 @@ function randomNumber() {
  * Попадание в активный квадрат
  */
 function hittingTarget(dataTarget) {
-    const number = dataTarget.getAttribute('id');
-    hideSquare(number);
+    hideSquare(dataTarget);
     limit--;
     stepUser++;
     round();
@@ -45,9 +44,9 @@ function errorTarget(dataTarget) {
     if (btnBlock) {
         return false;
     }
-    dataTarget.style.backgroundColor = '#ff1100';
+    dataTarget.classList.add('error-signal');
     setTimeout(() => {
-        dataTarget.style.backgroundColor = '#ffa500';
+        dataTarget.classList.remove('error-signal');
     }, 200);
     counterError++;
 }
@@ -57,21 +56,22 @@ function errorTarget(dataTarget) {
  * @param number
  */
 function showSquare(number) {
-    let parent = document.querySelector(`.square-${number}`);
-    parent.classList.remove('js-target-error');
-    parent.firstElementChild.classList.add('js-target-for-user');
-    parent.firstElementChild.textContent = `${stepUser}`;
+    let square = document.querySelector(`#square-${number}`);
+    square.classList.remove('js-target-error');
+    square.classList.add('js-target-for-user');
+    square.textContent = `${stepUser}`;
 }
 
 /**
  * Скрывает активный квадрат
- * @param number
  */
-function hideSquare(number) {
-    let parent = document.querySelector(`.square-${number}`);
-    parent.classList.add('js-target-error');
-    parent.firstElementChild.classList.remove('js-target-for-user');
-    parent.firstElementChild.textContent = ``;
+function hideSquare(dataTarget) {
+    dataTarget.classList.remove('js-target-for-user');
+    dataTarget.textContent = ``;
+    setTimeout(() => {
+        dataTarget.classList.add('js-target-error');
+    }, 100);
+
 }
 
 /**
@@ -106,7 +106,9 @@ function restartGame() {
     const resultText = document.querySelector('.result-game__text');
     resultText ? resultText.style.display = 'none' : false;
     const targetForUser = document.querySelector('.js-target-for-user');
-    targetForUser ? targetForUser.classList.remove('js-target-for-user') : false;
+    if (targetForUser) {
+        hideSquare(targetForUser)
+    }
     btnBlock = true;
 }
 

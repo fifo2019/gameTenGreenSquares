@@ -44,18 +44,13 @@
 .square {
     display: flex;
     background-color: #ffa500;
+    color: #000000;
+    justify-content: center;
+    align-items: center;
 }
 
 .square:hover {
     cursor: pointer;
-}
-
-.squaer__text {
-    display: none;
-    color: #000000;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
 }
 
 .js-target-for-user {
@@ -114,4 +109,8 @@
 
 .start-btn:active {
     background-color: #fff700;
+}
+
+.error-signal {
+    background-color: #ff1100;
 }
